@@ -1,0 +1,26 @@
+language: php
+
+addons:
+  postgresql: "9.6"
+
+services:
+  - postgresql
+
+php:
+  - "7.0"
+  - "7.1"
+
+install:
+  - composer install
+
+before_script:
+  - psql -c 'create database umeme-test-db;' -U postgres
+
+script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/
+  test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+  - composer test
+  - ./cc-test-reporter after-build --coverage-input-type clover --exit-code $?
+

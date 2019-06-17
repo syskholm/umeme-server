@@ -1,0 +1,36 @@
+imports:
+  - { resource: "vendor/symplify/easy-coding-standard/config/set/psr2.yaml" }
+  - {
+      resource: "vendor/symplify/easy-coding-standard/config/set/clean-code.yaml",
+    }
+  - { resource: "vendor/symplify/easy-coding-standard/config/set/common.yaml" }
+
+services:
+  # arrays
+  PHP_CodeSniffer\Standards\Generic\Sniffs\Arrays\DisallowLongArraySyntaxSniff: ~
+parameters:
+  exclude_files:
+    - "config/*"
+    - "bootstrap/*"
+    - "database/*"
+    - "*/node_modules/*"
+    - "*/vendor/*"
+    - "*/tests/**/Example*.php"
+    - "app/**/Kernel.php"
+    - "app/**/Handler.php"
+    - "app/**/Controller.php"
+    - "app/User.php"
+    - "app/Http/Controllers/Auth/*"
+    - "app/Http/Middleware/*"
+    - "app/Providers/AuthServiceProvider.php"
+    - "app/Providers/BroadcastServiceProvider.php"
+    - "app/Providers/EventServiceProvider.php"
+    - "app/Providers/RouteServiceProvider.php"
+    - "resources/*"
+    - "storage/*"
+    - "public/*"
+  exclude_checkers:
+    - 'PhpCsFixer\Fixer\PhpUnit\PhpUnitStrictFixer'
+    - 'PhpCsFixer\Fixer\Import\NoUnusedImportsFixer'
+  skip:
+    PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\AssignmentInConditionSniff.Found: ~
