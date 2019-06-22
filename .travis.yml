@@ -3,23 +3,28 @@ language: php
 addons:
  postgresql: "9.6"
 
+env:
+ global:
+  - PGPORT=5432
+  - CC_TEST_REPORTER_ID=${CC_TEST_REPORTER_ID}
+
 services:
  - postgresql
 
 php:
- - "7.0"
  - "7.1"
 
 install:
  - composer install
 
 before_script:
- - psql -c 'create database umeme-test-db;' -U postgres
-
-script:
- - curl -L https://codeclimate.com/downloads/test-reporter/
-    test-reporter-latest-linux-amd64 > ./cc-test-reporter
+ - psql -c 'create database umeme_test_db;' -U postgres
+ - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
  - chmod +x ./cc-test-reporter
  - ./cc-test-reporter before-build
+
+script:
  - composer test
- - ./cc-test-reporter after-build --coverage-input-type clover --exit-code $?
+
+after_script:
+ - ./cc-test-reporter after-build -t clover --exit-code $TRAVIS_TEST_RESULT
