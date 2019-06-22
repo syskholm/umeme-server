@@ -28,9 +28,14 @@
                 <directory suffix=".php">./app/Http/Kernel.php</directory>
                 <directory suffix=".php">./app/Exceptions/</directory>
                 <directory suffix=".php">./app/Providers/</directory>
+                <directory suffix=".php">./app/Http/Controllers/Auth/</directory>
             </exclude>
         </whitelist>
     </filter>
+    <logging>
+        <log type="coverage-html" target="./report"
+            lowUpperBound="50" highLowerBound="80" />
+    </logging>
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
