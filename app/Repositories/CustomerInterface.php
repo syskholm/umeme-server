@@ -5,10 +5,8 @@ namespace App\Repositories;
 interface CustomerInterface
 {
     /**
-     * Creates a new customer
-     *
-     * @param object $customerInfo
-     * @return mixed
+     * Create customer
+     * @param array $customerInfo
      */
     public function createCustomer($customerInfo);
 }

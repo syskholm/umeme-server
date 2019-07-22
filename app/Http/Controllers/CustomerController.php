@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RegisterCustomerRequest;
+use App\Http\Requests\RegisterUserRequest;
 use App\Repositories\CustomerInterface;
 
 class CustomerController extends Controller
@@ -12,18 +12,15 @@ class CustomerController extends Controller
         $this->customerService = $customerService;
     }
 
-    /**
-     * Create a new customer
-     *
-     * @param RegisterCustomerRequest $request
-     */
-    public function store(RegisterCustomerRequest $request)
+    public function store(RegisterUserRequest $request)
     {
-        $this->customerService->createCustomer($request->validated());
-
+        $customer = $this->customerService->createCustomer($request->validated());
         return response(
-            ['message' => 'Customer has been created successfully'],
-            201
+            [
+                'message' => $customer ? 'Registration successful' : 'Registration failed',
+                'customer' => $customer,
+            ],
+            $customer ? 201 : 422
         );
     }
 }

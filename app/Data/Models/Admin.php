@@ -2,16 +2,23 @@
 
 namespace App\Data\Models;
 
-use App\Observers\CustomerObserver;
+use App\Observers\AdminObserver;
 
-class Customer extends AuthUser
+class Admin extends AuthUser
 {
     /**
      * The table name
      *
      * @var string
      */
-    protected $table = 'customers';
+    protected $table = 'admins';
+
+    /**
+     * The attributes that are hidden.
+     *
+     * @var array
+     */
+    protected $hidden = ['created_at', 'updated_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -36,7 +43,7 @@ class Customer extends AuthUser
     }
 
     /**
-     * Eevery customer is a user
+     * Eevery admin is a user
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -46,11 +53,11 @@ class Customer extends AuthUser
     }
 
     /**
-     * Register the customer observer
+     * Register the admin observer
      */
     public static function boot()
     {
         parent::boot();
-        self::observe(new CustomerObserver());
+        self::observe(new AdminObserver());
     }
 }
