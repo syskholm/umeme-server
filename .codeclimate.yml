@@ -26,6 +26,7 @@ exclude_patterns:
   - "app/Providers/BroadcastServiceProvider.php"
   - "app/Providers/EventServiceProvider.php"
   - "app/Providers/RouteServiceProvider.php"
+  - "app/Repositories/*.php"
   - "resources/js/app.js"
   - "resources/js/bootstrap.js"
   - "resources/js/components/ExampleComponents.vue"

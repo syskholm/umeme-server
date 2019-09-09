@@ -10,6 +10,7 @@
  */
 
 $publicKey = base64_decode(env('PUBLIC_KEY'));
+$privateKey = base64_decode(env('PRIVATE_KEY'));
 
 return [
 
@@ -72,7 +73,7 @@ return [
         |
          */
 
-        'private' => env('JWT_PRIVATE_KEY'),
+        'private' => env('JWT_PRIVATE_KEY', $privateKey),
 
         /*
         |--------------------------------------------------------------------------

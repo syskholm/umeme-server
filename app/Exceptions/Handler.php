@@ -46,6 +46,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof \Tymon\JWTAuth\Exceptions\JWTException) {
+            return response()->json(['message' => $exception->getMessage()], 401);
+        }
+        if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+            return response()->json(['message' => 'Route not found'], 404);
+        }
         return parent::render($request, $exception);
     }
 }
